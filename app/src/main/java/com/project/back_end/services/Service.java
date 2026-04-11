@@ -180,8 +180,6 @@ public class Service {
             }
             Patient patient = patientOpt.get();
 
-            Long patientId = patient.getId();
-
             if (condition != null && name != null) {
                 return patientService.filterByDoctorAndCondition(condition, name, patientId);
             } else if (condition != null) {
