@@ -11,7 +11,7 @@
 html,
 body {
     height: 100%;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Outfit', 'Roboto', sans-serif;
 }
 
 /* Layout wrapper */
@@ -21,52 +21,71 @@ body {
     min-height: 100vh;
 }
 
-/* Heading */
-h2 {
-    font-size: 48px;
-    margin-bottom: 50px;
-    color: #003e3e;
-    font-weight: bold;
-    font-family: 'Alegreya', 'Roboto', sans-serif;
-}
-
 /* Main section */
 .main-content {
     flex-grow: 1;
-    padding: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
+    background-image: url("./assets/images/defineRole/index.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    padding: 60px 20px;
 }
 
-/* Buttons */
+/* Heading */
+h2 {
+    font-size: 3.5rem;
+    margin-bottom: 40px;
+    color: #003e3e;
+    font-weight: 700;
+}
+
+.role-text {
+    color: #A62B1F; /* Maroon/Red from screenshot */
+}
+
+/* Role Buttons Container */
+.role-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 320px;
+}
+
+/* Buttons Styling */
 button {
     background-color: #015c5d;
     color: white;
     border: none;
-    border-radius: 12px;
-    padding: 10px 20px;
-    width: 200px;
-    margin-top: 10px;
+    border-radius: 20px; /* Pill shaped as requested */
+    padding: 12px 20px;
+    width: 100%;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 button:hover {
-    background-color: #A62B1F;
-}
-
-/* Dashboard buttons */
-.dashboard-btn {
-    background-color: #015c5d;
-}
-
-.dashboard-btn:hover {
     background-color: #003e3e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 2.5rem;
+    }
 }
