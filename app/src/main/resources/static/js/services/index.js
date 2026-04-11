@@ -128,7 +128,8 @@ window.loginPatient = async function() {
         if (response.ok) {
             const data = await response.json();
             localStorage.setItem("token", data.token);
-            selectRole('patient');
+            selectRole('loggedpatient');
+            window.location.href = '/pages/loggedPatientDashboard.html';
         } else {
             alert("Invalid credentials / Login failed");
         }

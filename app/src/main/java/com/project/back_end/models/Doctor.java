@@ -45,7 +45,6 @@ public class Doctor {
     private String password;
 
     @NotNull(message = "Phone number is required")
-    @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
     @Column(nullable = false)
     private String phone;
 

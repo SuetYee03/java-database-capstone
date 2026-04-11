@@ -29,7 +29,6 @@ public class Appointment {
     @NotNull(message = "Patient cannot be null")
     private Patient patient;
 
-    @Future (message = "Appointment time must be in the future")
     @NotNull(message = "Appointment time cannot be null")
     private LocalDateTime appointmentTime;
     private int status; // 0 = Scheduled, 1 = Completed

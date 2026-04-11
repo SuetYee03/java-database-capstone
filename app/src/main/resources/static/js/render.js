@@ -10,7 +10,7 @@ function selectRole(role) {
     }
   } else if (role === "patient") {
     if (token) {
-      window.location.href = "/pages/patientDashboard.html";
+      window.location.href = "/pages/loggedPatientDashboard.html";
     }
   } else if (role === "doctor") {
     if (token) {
