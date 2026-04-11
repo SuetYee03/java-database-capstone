@@ -84,7 +84,9 @@ async function loadAppointments() {
                 id: appointment.patientId,
                 name: appointment.patientName,
                 phone: appointment.patientPhone,
-                email: appointment.patientEmail
+                email: appointment.patientEmail,
+                date: appointment.appointmentDate,
+                time: appointment.appointmentTimeOnly
             };
             // Note: appointment object from backend likely has the properties needed
             const row = createPatientRow(patient, appointment.id, appointment.doctorId);

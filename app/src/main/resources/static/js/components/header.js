@@ -21,6 +21,7 @@ function renderHeader() {
                 <span class="logo-title">Hospital CMS</span>
             </div>
             <nav class="nav-links">
+                <a href="${pathPrefix}/" class="nav-link">Main Home</a>
     `;
 
     if (role === "admin") {
@@ -40,7 +41,7 @@ function renderHeader() {
         `;
     } else if (role === "loggedpatient") {
         headerContent += `
-            <button id="homeBtn" class="adminBtn">Home</button>
+            <button id="homeBtn" class="adminBtn">Dashboard</button>
             <button id="patientAppointments" class="adminBtn">Appointments</button>
             <a href="#" id="logoutPatientBtn">Logout</a>
         `;

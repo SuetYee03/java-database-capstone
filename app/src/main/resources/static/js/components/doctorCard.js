@@ -88,8 +88,12 @@ export function createDoctorCard(doctor) {
             }
 
             try {
-                const patientData = await getPatientData(token);
-                showBookingOverlay(e, doctor, patientData);
+                const responseData = await getPatientData(token);
+                if (responseData && responseData.patient) {
+                    showBookingOverlay(e, doctor, responseData.patient);
+                } else {
+                    alert("Unable to load patient data for booking.");
+                }
             } catch (error) {
                 console.error("Booking error:", error);
                 alert("Unable to load patient data for booking.");
