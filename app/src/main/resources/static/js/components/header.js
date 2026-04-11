@@ -2,35 +2,22 @@ function renderHeader() {
     const headerDiv = document.getElementById("header");
     if (!headerDiv) return;
 
-    if (window.location.pathname.endsWith("/")) {
-        localStorage.removeItem("userRole");
-        localStorage.removeItem("token");
-
-        headerDiv.innerHTML = `
-            <header class="header">
-                <div class="logo-section">
-                    <img src="./assets/images/logo/logo.png" alt="Hospital CRM Logo" class="logo-img">
-                    <span class="logo-title">Hospital CMS</span>
-                </div>
-            </header>
-        `;
-        return;
-    }
-
     const role = localStorage.getItem("userRole");
     const token = localStorage.getItem("token");
 
-    if ((role === "loggedPatient" || role === "admin" || role === "doctor") && !token) {
+    if ((role === "loggedpatient" || role === "admin" || role === "doctor") && !token) {
         localStorage.removeItem("userRole");
         alert("Session expired or invalid login. Please log in again.");
         window.location.href = "/";
         return;
     }
 
+    const pathPrefix = window.location.pathname.endsWith(".html") || window.location.pathname.includes("/pages/") ? ".." : ".";
+
     let headerContent = `
         <header class="header">
             <div class="logo-section">
-                <img src="../assets/images/logo/logo.png" alt="Hospital CRM Logo" class="logo-img">
+                <img src="${pathPrefix}/assets/images/logo/logo.png" alt="Hospital CRM Logo" class="logo-img">
                 <span class="logo-title">Hospital CMS</span>
             </div>
             <nav class="nav-links">
@@ -51,7 +38,7 @@ function renderHeader() {
             <button id="patientLogin" class="adminBtn">Login</button>
             <button id="patientSignup" class="adminBtn">Sign Up</button>
         `;
-    } else if (role === "loggedPatient") {
+    } else if (role === "loggedpatient") {
         headerContent += `
             <button id="homeBtn" class="adminBtn">Home</button>
             <button id="patientAppointments" class="adminBtn">Appointments</button>

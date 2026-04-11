@@ -42,8 +42,8 @@ public class PatientService {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            String email = tokenService.extractEmail(token);
-            Optional<Patient> patientOpt = patientRepository.findByEmail(email);
+            Long patientId = tokenService.extractId(token);
+            Optional<Patient> patientOpt = patientRepository.findById(patientId);
 
             if (patientOpt.isEmpty()) {
                 response.put("message", "Patient not found");
@@ -161,8 +161,8 @@ public class PatientService {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            String email = tokenService.extractEmail(token);
-            Optional<Patient> patientOpt = patientRepository.findByEmail(email);
+            Long patientId = tokenService.extractId(token);
+            Optional<Patient> patientOpt = patientRepository.findById(patientId);
 
             if (patientOpt.isEmpty()) {
                 response.put("message", "Patient not found");

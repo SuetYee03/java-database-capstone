@@ -73,12 +73,20 @@ public class TokenService {
                     }
 
                 case "doctor":
-                    Optional<Doctor> doctorOpt = Optional.ofNullable(doctorRepository.findByEmail(identifier));
-                    return doctorOpt.isPresent() && !isTokenExpired(token);
+                    try {
+                        Long doctorId = Long.parseLong(identifier);
+                        return doctorRepository.findById(doctorId).isPresent() && !isTokenExpired(token);
+                    } catch (NumberFormatException e) {
+                        return false;
+                    }
 
                 case "patient":
-                    Optional<Patient> patientOpt = patientRepository.findByEmail(identifier);
-                    return patientOpt.isPresent() && !isTokenExpired(token);
+                    try {
+                        Long patientId = Long.parseLong(identifier);
+                        return patientRepository.findById(patientId).isPresent() && !isTokenExpired(token);
+                    } catch (NumberFormatException e) {
+                        return false;
+                    }
 
                 default:
                     return false;

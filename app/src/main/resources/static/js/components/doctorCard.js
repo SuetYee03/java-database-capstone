@@ -72,7 +72,7 @@ export function createDoctorCard(doctor) {
         });
 
         actionsDiv.appendChild(bookNow);
-    } else if (role === "loggedPatient") {
+    } else if (role === "loggedpatient") {
         const bookNow = document.createElement("button");
         bookNow.textContent = "Book Now";
 

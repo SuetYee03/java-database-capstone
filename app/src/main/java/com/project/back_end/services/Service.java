@@ -171,8 +171,8 @@ public class Service {
     ) {
 
         try {
-            String email = tokenService.extractEmail(token);
-            Optional<Patient> patientOpt = patientRepository.findByEmail(email);
+            Long patientId = tokenService.extractId(token);
+            Optional<Patient> patientOpt = patientRepository.findById(patientId);
 
             if (patientOpt.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
