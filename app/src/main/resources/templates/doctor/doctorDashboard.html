@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoctorDashboard</title>
+
+    <link rel="icon" type="image/png" th:href="@{/assets/images/logo/logo.png}" />
+
+    <link rel="stylesheet" href="./assets/css/adminDashboard.css">
+    <link rel="stylesheet" href="./assets/css/doctorDashboard.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <script src="./js/render.js" defer></script>
+    <script src="./js/util.js" defer></script>
+    <script src="./js/components/header.js" defer></script>
+    <script src="./js/components/footer.js" defer></script>
+    <script src="./js/components/patientRows.js" defer></script>
+    <script src="./js/services/patientServices.js" defer></script>
+    <script src="./js/doctorDashboard.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div id="header"></div>
+
+            <main class="main-content">
+                <h2>Doctor Dashboard</h2>
+
+                <input type="text" id="searchBar" placeholder="Search patient..." />
+
+                <div class="filters">
+                    <button id="todayAppointmentsBtn">Today's Appointments</button>
+                    <input type="date" id="appointmentDate" />
+                </div>
+
+                <div class="table-container">
+                    <table id="patientTable">
+                        <thead>
+                            <tr>
+                                <th>Patient ID</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Prescription</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patientTableBody">
+                            <!-- Patient rows will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+
+            <div id="footer"></div>
+        </div>
+    </div>
+</body>
+</html>
