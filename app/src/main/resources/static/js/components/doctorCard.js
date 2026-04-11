@@ -15,13 +15,14 @@ export function createDoctorCard(doctor) {
     name.textContent = doctor.name;
 
     const specialization = document.createElement("p");
-    specialization.textContent = `Specialization: ${doctor.specialization}`;
+    specialization.textContent = `Specialization: ${doctor.specialty}`;
 
     const email = document.createElement("p");
     email.textContent = `Email: ${doctor.email}`;
 
     const availability = document.createElement("p");
-    availability.textContent = `Availability: ${Array.isArray(doctor.availability) ? doctor.availability.join(", ") : doctor.availability}`;
+    const times = doctor.availableTimes || doctor.availability || [];
+    availability.textContent = `Availability: ${Array.isArray(times) ? times.join(", ") : times}`;
 
     infoDiv.appendChild(name);
     infoDiv.appendChild(specialization);

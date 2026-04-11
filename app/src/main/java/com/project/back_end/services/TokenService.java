@@ -63,8 +63,14 @@ public class TokenService {
 
             switch (user.toLowerCase()) {
                 case "admin":
-                    Optional<Admin> adminOpt = adminRepository.findByUsername(identifier);
-                    return adminOpt.isPresent() && !isTokenExpired(token);
+                    try {
+                        Long adminId = Long.parseLong(identifier);
+                        return adminRepository.findById(adminId).isPresent() && !isTokenExpired(token);
+                    } catch (NumberFormatException e) {
+                        // fallback: try username
+                        Optional<Admin> adminOpt = adminRepository.findByUsername(identifier);
+                        return adminOpt.isPresent() && !isTokenExpired(token);
+                    }
 
                 case "doctor":
                     Optional<Doctor> doctorOpt = Optional.ofNullable(doctorRepository.findByEmail(identifier));

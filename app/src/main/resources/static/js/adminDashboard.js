@@ -85,7 +85,7 @@ window.adminAddDoctor = async function () {
         return;
     }
 
-    const doctor = { name, email, phone, password, specialization, availability };
+    const doctor = { name, email, phone, password, specialty: specialization, availableTimes: availability };
 
     const result = await saveDoctor(doctor, token);
     if (result.success) {
