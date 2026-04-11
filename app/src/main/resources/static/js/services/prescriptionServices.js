@@ -21,6 +21,10 @@ export async function savePrescription(prescription, token) {
 }
 
 export async function getPrescription(appointmentId, token) {
+  if (!appointmentId || appointmentId === "null" || appointmentId === "undefined") {
+    console.error("getPrescription :: Invalid appointmentId:", appointmentId);
+    throw new Error("Invalid or missing Appointment ID. Please refresh and try again.");
+  }
   try {
     const response = await fetch(`${PRESCRITION_API}/${appointmentId}/${token}`, {
       method: "GET",

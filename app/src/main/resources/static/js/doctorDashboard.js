@@ -78,8 +78,10 @@ async function loadAppointments() {
                 </tr>`;
             return;
         }
+        console.log("Appointments fetched:", appointments);
 
         appointments.forEach(appointment => {
+            console.log("Processing appointment:", appointment);
             const patient = {
                 id: appointment.patientId,
                 name: appointment.patientName,

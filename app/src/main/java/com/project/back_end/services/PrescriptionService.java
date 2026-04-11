@@ -34,19 +34,19 @@ public class PrescriptionService {
     public ResponseEntity<Map<String, Object>> getPrescription(Long appointmentId) {
         Map<String, Object> response = new HashMap<>();
 
-        if (appointmentId == null) {
-            response.put("message", "Appointment ID is missing");
+        if (appointmentId == null || appointmentId <= 0) {
+            response.put("message", "Invalid or missing Appointment ID");
             return ResponseEntity.badRequest().body(response);
         }
 
         try {
             List<Prescription> prescriptions = prescriptionRepository.findByAppointmentId(appointmentId);
-            response.put("prescription", prescriptions); // Changed to singular for consistency
+            response.put("prescription", prescriptions);
             response.put("message", "Prescription retrieved successfully");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            e.printStackTrace(); // Added for debugging 500 errors
-            response.put("message", "Internal server error");
+            e.printStackTrace();
+            response.put("message", "Internal server error: " + e.getMessage()); // Added message for diagnostics
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
