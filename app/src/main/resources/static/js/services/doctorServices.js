@@ -52,9 +52,9 @@ export async function filterDoctors(name, time, specialty) {
         const params = new URLSearchParams();
         if (name) params.append('name', name);
         if (time) params.append('time', time);
-        if (specialty) params.append('specialty', specialty);
+        if (specialty) params.append('speciality', specialty);
 
-        const response = await fetch(`${DOCTOR_API}?${params.toString()}`);
+        const response = await fetch(`${DOCTOR_API}/filter?${params.toString()}`);
         if (response.ok) {
             const data = await response.json();
             return data;

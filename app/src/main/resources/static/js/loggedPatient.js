@@ -86,10 +86,14 @@ export function showBookingOverlay(e, doctor, patient) {
 
 
 
-// Filter Input
-document.getElementById("searchBar").addEventListener("input", filterDoctorsOnChange);
-document.getElementById("filterTime").addEventListener("change", filterDoctorsOnChange);
-document.getElementById("filterSpecialty").addEventListener("change", filterDoctorsOnChange);
+// Filter Input - guard against null elements (this file may load on other pages)
+const searchBarEl = document.getElementById("searchBar");
+const filterTimeEl = document.getElementById("filterTime");
+const filterSpecialtyEl = document.getElementById("filterSpecialty");
+
+if (searchBarEl) searchBarEl.addEventListener("input", filterDoctorsOnChange);
+if (filterTimeEl) filterTimeEl.addEventListener("change", filterDoctorsOnChange);
+if (filterSpecialtyEl) filterSpecialtyEl.addEventListener("change", filterDoctorsOnChange);
 
 
 
