@@ -14,14 +14,15 @@ async function initializePage() {
   try {
     if (!token) throw new Error("No token found");
 
-    const patient = await getPatientData(token);
-    if (!patient) throw new Error("Failed to fetch patient details");
+    const responseData = await getPatientData(token);
+    if (!responseData || !responseData.patient) throw new Error("Failed to fetch patient details");
 
+    const patient = responseData.patient;
     patientId = Number(patient.id);
 
-    const response = await getPatientAppointments(patientId, token, "patient");
-    const appointments = response?.appointments || [];
-    allAppointments = appointments.filter(app => app.patientId === patientId);
+    const appointmentsResponse = await getPatientAppointments(patientId, token, "patient");
+    const appointments = appointmentsResponse?.appointments || [];
+    allAppointments = appointments; // Backend already filters by patientId via URL and Token validation
 
     renderAppointments(allAppointments);
   } catch (error) {
@@ -95,7 +96,7 @@ async function handleFilterChange() {
   try {
     const response = await filterAppointments(condition, name, token);
     const appointments = response?.appointments || [];
-    filteredAppointments = appointments.filter(app => app.patientId === patientId);
+    filteredAppointments = appointments;
 
     renderAppointments(filteredAppointments);
   } catch (error) {

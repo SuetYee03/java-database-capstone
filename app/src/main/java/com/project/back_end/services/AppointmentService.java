@@ -147,4 +147,36 @@ public class AppointmentService {
             return result;
         }
     }
+
+    public Map<String, Object> getAllAppointmentsForDoctor(String pname, String token) {
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            Long doctorId = tokenService.extractId(token);
+
+            if (doctorId == null) {
+                result.put("message", "Invalid token");
+                result.put("appointments", List.of());
+                return result;
+            }
+
+            List<Appointment> appointments;
+
+            if (pname != null && !pname.trim().isEmpty() && !pname.equals("null")) {
+                appointments = appointmentRepository
+                        .findByDoctorIdAndPatient_NameContainingIgnoreCase(doctorId, pname);
+            } else {
+                appointments = appointmentRepository.findByDoctorId(doctorId);
+            }
+
+            result.put("appointments", appointments);
+            result.put("message", "All appointments retrieved successfully");
+            return result;
+
+        } catch (Exception e) {
+            result.put("message", "Failed to retrieve all appointments");
+            result.put("appointments", List.of());
+            return result;
+        }
+    }
 }

@@ -31,6 +31,25 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.getAppointment(pname, LocalDate.parse(date), token));
     }
 
+    @GetMapping("/all/{token}")
+    public ResponseEntity<?> getDoctorAllAppointments(@PathVariable String token) {
+        ResponseEntity<Map<String, String>> tokenValidation = service.validateToken(token, "doctor");
+        if (!tokenValidation.getStatusCode().is2xxSuccessful()) {
+            return tokenValidation;
+        }
+        return ResponseEntity.ok(appointmentService.getAllAppointmentsForDoctor(null, token));
+    }
+
+    @GetMapping("/all/{pname}/{token}")
+    public ResponseEntity<?> getDoctorAllAppointmentsWithPatient(@PathVariable String pname,
+                                                                 @PathVariable String token) {
+        ResponseEntity<Map<String, String>> tokenValidation = service.validateToken(token, "doctor");
+        if (!tokenValidation.getStatusCode().is2xxSuccessful()) {
+            return tokenValidation;
+        }
+        return ResponseEntity.ok(appointmentService.getAllAppointmentsForDoctor(pname, token));
+    }
+
     @PostMapping("/{token}")
     public ResponseEntity<Map<String, String>> bookAppointment(@RequestBody Appointment appointment,
                                                                @PathVariable String token) {

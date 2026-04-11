@@ -13,6 +13,19 @@ export async function getAllAppointments(date, patientName, token) {
   return await response.json();
 }
 
+export async function getDoctorAllAppointments(patientName, token) {
+  const url = patientName === "null" || !patientName 
+    ? `${APPOINTMENT_API}/all/${token}` 
+    : `${APPOINTMENT_API}/all/${patientName}/${token}`;
+    
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Failed to fetch all appointments");
+  }
+
+  return await response.json();
+}
+
 export async function bookAppointment(appointment, token) {
   try {
     const response = await fetch(`${APPOINTMENT_API}/${token}`, {

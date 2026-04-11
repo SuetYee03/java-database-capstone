@@ -1,14 +1,16 @@
-import { getAllAppointments } from './services/appointmentRecordService.js';
+import { getAllAppointments, getDoctorAllAppointments } from './services/appointmentRecordService.js';
 import { createPatientRow } from './components/patientRows.js';
 
 const tableBody = document.getElementById("patientTableBody");
 const searchBar = document.getElementById("searchBar");
 const todayBtn = document.getElementById("todayAppointmentsBtn");
+const allBtn = document.getElementById("allAppointmentsBtn");
 const datePicker = document.getElementById("appointmentDate");
 const token = localStorage.getItem("token");
 
 let selectedDate = new Date().toISOString().split('T')[0];
 let patientName = "null";
+let isViewAll = false;
 
 // Set initial date in picker
 if (datePicker) datePicker.value = selectedDate;
@@ -26,14 +28,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (todayBtn) {
         todayBtn.addEventListener('click', () => {
+            isViewAll = false;
             selectedDate = new Date().toISOString().split('T')[0];
             if (datePicker) datePicker.value = selectedDate;
             loadAppointments();
         });
     }
 
+    if (allBtn) {
+        allBtn.addEventListener('click', () => {
+            isViewAll = true;
+            if (datePicker) datePicker.value = "";
+            loadAppointments();
+        });
+    }
+
     if (datePicker) {
         datePicker.addEventListener('change', (e) => {
+            isViewAll = false;
             selectedDate = e.target.value;
             loadAppointments();
         });
@@ -47,7 +59,12 @@ async function loadAppointments() {
             return;
         }
 
-        const response = await getAllAppointments(selectedDate, patientName, token);
+        let response;
+        if (isViewAll) {
+            response = await getDoctorAllAppointments(patientName, token);
+        } else {
+            response = await getAllAppointments(selectedDate, patientName, token);
+        }
         const appointments = response?.appointments || [];
         tableBody.innerHTML = "";
 

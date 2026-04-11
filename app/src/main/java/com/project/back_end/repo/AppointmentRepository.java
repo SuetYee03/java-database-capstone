@@ -26,12 +26,26 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     @Query("SELECT a FROM Appointment a " +
            "LEFT JOIN FETCH a.doctor d " +
+           "WHERE d.id = :doctorId")
+    List<Appointment> findByDoctorId(Long doctorId);
+
+    @Query("SELECT a FROM Appointment a " +
+           "LEFT JOIN FETCH a.doctor d " +
            "LEFT JOIN FETCH a.patient p " +
            "WHERE d.id = :doctorId " +
            "AND LOWER(p.name) LIKE LOWER(CONCAT('%', :patientName, '%')) " +
            "AND a.appointmentTime BETWEEN :start AND :end")
     List<Appointment> findByDoctorIdAndPatient_NameContainingIgnoreCaseAndAppointmentTimeBetween(
             Long doctorId, String patientName, LocalDateTime start, LocalDateTime end
+    );
+
+    @Query("SELECT a FROM Appointment a " +
+           "LEFT JOIN FETCH a.doctor d " +
+           "LEFT JOIN FETCH a.patient p " +
+           "WHERE d.id = :doctorId " +
+           "AND LOWER(p.name) LIKE LOWER(CONCAT('%', :patientName, '%'))")
+    List<Appointment> findByDoctorIdAndPatient_NameContainingIgnoreCase(
+            Long doctorId, String patientName
     );
 
     @Modifying

@@ -46,8 +46,7 @@ export async function getPatientData(token) {
   try {
     const response = await fetch(`${PATIENT_API}/${token}`);
     const data = await response.json();
-    if (response.ok) return data.patient;
-    return null;
+    return data;
   } catch (error) {
     console.error("Error fetching patient details:", error);
     return null;
@@ -59,11 +58,7 @@ export async function getPatientAppointments(id, token, user) {
   try {
     const response = await fetch(`${PATIENT_API}/${id}/${user}/${token}`);
     const data = await response.json();
-    console.log(data.appointments)
-    if (response.ok) {
-      return data.appointments;
-    }
-    return null;
+    return data;
   }
   catch (error) {
     console.error("Error fetching patient details:", error);
