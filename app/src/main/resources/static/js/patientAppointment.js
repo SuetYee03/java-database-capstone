@@ -19,8 +19,9 @@ async function initializePage() {
 
     patientId = Number(patient.id);
 
-    const appointmentData = await getPatientAppointments(patientId, token, "patient") || [];
-    allAppointments = appointmentData.filter(app => app.patientId === patientId);
+    const response = await getPatientAppointments(patientId, token, "patient");
+    const appointments = response?.appointments || [];
+    allAppointments = appointments.filter(app => app.patientId === patientId);
 
     renderAppointments(allAppointments);
   } catch (error) {

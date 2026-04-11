@@ -47,15 +47,16 @@ async function loadAppointments() {
             return;
         }
 
-        const data = await getAllAppointments(selectedDate, patientName, token);
+        const response = await getAllAppointments(selectedDate, patientName, token);
+        const appointments = response?.appointments || [];
         tableBody.innerHTML = "";
 
-        if (!data || data.length === 0) {
+        if (appointments.length === 0) {
             tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No Appointments found for today.</td></tr>';
             return;
         }
 
-        data.forEach(appointment => {
+        appointments.forEach(appointment => {
             const patient = {
                 id: appointment.patientId,
                 name: appointment.patientName,

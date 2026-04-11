@@ -15,10 +15,11 @@ async function initializePage() {
   try {
     if (!token) throw new Error("No token found");
 
-    const appointmentData = await getPatientAppointments(patientId, token, "doctor") || [];
+    const response = await getPatientAppointments(patientId, token, "doctor");
+    const appointments = response?.appointments || [];
 
-    // Filter by both patientId and doctorId
-    const filteredAppointments = appointmentData.filter(app =>
+    // Filter by doctorId if needed (backend might already return only relevant ones)
+    const filteredAppointments = appointments.filter(app =>
       app.doctorId == doctorId);
     console.log(filteredAppointments)
     renderAppointments(filteredAppointments);
