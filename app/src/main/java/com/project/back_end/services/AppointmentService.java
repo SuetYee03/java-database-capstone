@@ -189,6 +189,8 @@ public class AppointmentService {
             result.put("appointments", List.of());
             return result;
         }
+    }
+
     private AppointmentDTO convertToDTO(Appointment appointment) {
         return new AppointmentDTO(
                 appointment.getId(),
