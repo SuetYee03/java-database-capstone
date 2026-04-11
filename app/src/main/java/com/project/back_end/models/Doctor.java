@@ -49,7 +49,7 @@ public class Doctor {
     @Column(nullable = false)
     private String phone;
 
-    @ElementCollection
+    @ElementCollection(fetch = jakarta.persistence.FetchType.EAGER)
     private List<String> availableTimes;
 
     public Doctor() {

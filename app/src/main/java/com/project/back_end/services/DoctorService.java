@@ -87,6 +87,7 @@ public class DoctorService {
     // ===============================
     // 4. Get All Doctors
     // ===============================
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<Doctor> getDoctors() {
         return doctorRepository.findAll();
     }
