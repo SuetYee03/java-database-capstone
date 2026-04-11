@@ -52,7 +52,13 @@ async function loadAppointments() {
         tableBody.innerHTML = "";
 
         if (appointments.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No Appointments found for today.</td></tr>';
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="5" style="text-align:center;">
+                        No Appointments found for this date. <br>
+                        <span style="color: #666; font-size: 0.9em;">(Tip: Try selecting 2025 in the calendar if looking for course data)</span>
+                    </td>
+                </tr>`;
             return;
         }
 

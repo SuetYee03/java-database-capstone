@@ -50,7 +50,7 @@ public class DoctorService {
                 .collect(Collectors.toList());
 
         return allSlots.stream()
-                .filter(slot -> !bookedSlots.contains(slot))
+                .filter(slot -> bookedSlots.stream().noneMatch(bookedTime -> slot.startsWith(bookedTime)))
                 .collect(Collectors.toList());
     }
 

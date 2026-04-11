@@ -122,7 +122,7 @@ public class Service {
                 .toLocalTime()
                 .toString();
 
-        if (availableSlots.contains(requestedTime)) {
+        if (availableSlots.stream().anyMatch(slot -> slot.startsWith(requestedTime))) {
             return 1;
         }
 
