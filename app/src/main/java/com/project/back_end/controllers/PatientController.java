@@ -50,10 +50,11 @@ public class PatientController {
         return service.validatePatientLogin(login);
     }
 
-    @GetMapping("/{id}/{token}")
+    @GetMapping("/{id}/{user}/{token}")
     public ResponseEntity<Map<String, Object>> getPatientAppointments(@PathVariable Long id,
+                                                                      @PathVariable String user,
                                                                       @PathVariable String token) {
-        ResponseEntity<Map<String, String>> tokenValidation = service.validateToken(token, "patient");
+        ResponseEntity<Map<String, String>> tokenValidation = service.validateToken(token, user);
         if (!tokenValidation.getStatusCode().is2xxSuccessful()) {
             return ResponseEntity.status(tokenValidation.getStatusCode())
                     .body(Map.of("message", tokenValidation.getBody().get("message")));

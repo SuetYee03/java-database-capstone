@@ -151,3 +151,28 @@ button:hover {
 .close-btn:hover {
     color: #A62B1F;
 }
+
+/* Floating Action Button */
+.floating-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: auto;
+    padding: 15px 25px;
+    border-radius: 50px;
+    background-color: #A62B1F;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, background-color 0.2s;
+    margin-top: 0; /* Override default margin */
+}
+
+.floating-btn:hover {
+    background-color: #8a241a;
+    transform: scale(1.05);
+}
