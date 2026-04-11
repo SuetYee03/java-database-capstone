@@ -67,23 +67,29 @@ tbody tr:hover {
     color: grey;
 }
 
+/* Filters section */
+.filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
 /* Today button */
 .today-btn {
-    margin-right: 10px;
-    padding: 10px;
-    background-color: #015c5d;
+    padding: 10px 20px;
+    background-color: #a52a2a;
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
 }
 
-/* Date picker */
 .date-picker {
-    margin-left: 10px;
-    margin-top: 13px;
     border-radius: 8px;
-    padding: 10px;
-    height: 30px;
+    padding: 8px 12px;
+    height: 40px;
     border: 1px solid #ccc;
+    font-family: inherit;
 }

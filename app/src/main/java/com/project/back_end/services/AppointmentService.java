@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.project.back_end.DTO.AppointmentDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -137,7 +140,11 @@ public class AppointmentService {
                         .findByDoctorIdAndAppointmentTimeBetween(doctorId, start, end);
             }
 
-            result.put("appointments", appointments);
+            List<AppointmentDTO> dtoList = appointments.stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
+
+            result.put("appointments", dtoList);
             result.put("message", "Appointments retrieved successfully");
             return result;
 
@@ -169,7 +176,11 @@ public class AppointmentService {
                 appointments = appointmentRepository.findByDoctorId(doctorId);
             }
 
-            result.put("appointments", appointments);
+            List<AppointmentDTO> dtoList = appointments.stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
+
+            result.put("appointments", dtoList);
             result.put("message", "All appointments retrieved successfully");
             return result;
 
@@ -178,5 +189,18 @@ public class AppointmentService {
             result.put("appointments", List.of());
             return result;
         }
+    private AppointmentDTO convertToDTO(Appointment appointment) {
+        return new AppointmentDTO(
+                appointment.getId(),
+                appointment.getDoctor().getId(),
+                appointment.getDoctor().getName(),
+                appointment.getPatient().getId(),
+                appointment.getPatient().getName(),
+                appointment.getPatient().getEmail(),
+                appointment.getPatient().getPhone(),
+                appointment.getPatient().getAddress(),
+                appointment.getAppointmentTime(),
+                appointment.getStatus()
+        );
     }
 }
